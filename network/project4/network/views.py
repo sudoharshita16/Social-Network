@@ -145,7 +145,7 @@ def profile(request,pid):
         })
        
 
-def following_post(request):
+def following_post(request,page_no):
     following_posts = Post.objects.none()
     userobj = User.objects.get(pk=request.user.id)
     userprofile = userobj.profile
@@ -163,11 +163,19 @@ def following_post(request):
     entries = following_posts.order_by('pk')
     #print(entries)
     entries = entries.reverse()
+    p = Paginator(entries, 3)
+    entries = p.page(page_no).object_list
+    page_obj = p.get_page(page_no)
+    ids = entries.values_list('pk', flat=True)
+    ids = list(ids)
+    ids.sort()
+    ids.reverse()
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
         "ids":ids,
-        "add_info":"following_posts"
+        "add_info":"following_posts",
+        "page_obj":page_obj
 
     })
 
@@ -245,10 +253,10 @@ def fval(request, puser_id):
 
 
 def lval(request,pid):
-    #print("reached lval function: ")
+    print("reached lval function: ")
     postobj = Post.objects.get(id=pid)
     likes = len(postobj.likers.all())
-    #print(likes)
+    print(likes)
     return JsonResponse({"likes":likes},status=201)
 
 def eval(request, pid):

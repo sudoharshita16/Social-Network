@@ -2,10 +2,9 @@ document.addEventListener('DOMContentLoaded',function(){
     var ar = document.querySelector('h3');
     var array = ar.innerHTML;
     var arr = JSON.parse(array);
+
+    console.log(arr);
     
-    //document.getElementById("one").innerHTML = str.split("");
-    //console.log(arr);
-    //console.log(arr.value);
     document.querySelectorAll('.likeunlike').forEach(function(form){
         form.onsubmit = function(){
             const entry_id = form.elements[1].value;
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function(){
             
             .then(response => response.json())
             .then(result => {
-                //console.log(result);
+                console.log(result);
                 fetch(`lval/${entry_id}`)  
                 .then(response => response.text())
                 .then(data=>{

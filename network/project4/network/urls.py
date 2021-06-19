@@ -10,13 +10,13 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("create", views.create, name="create"),
     path("profile/<int:pid>", views.profile, name="profile"),
-    path("following_post", views.following_post, name="following_post"),
+    path("following_post/<int:page_no>", views.following_post, name="following_post"),
     path("edit", views.edit, name="edit"),
     path("follow", views.follow, name="follow"),
     path("unfollow", views.unfollow, name="unfollow"),
     path("profile/fval/<int:puser_id>", views.fval, name='fval'),
     path("like_unlike",views.like_unlike, name="like_unlike"),
-    path("lval/<int:pid>",views.lval, name="lval"),
+    path("following_post/lval/<int:pid>",views.lval, name="lval"),
     path("eval/<int:pid>", views.eval, name="eval")
    
 ]
