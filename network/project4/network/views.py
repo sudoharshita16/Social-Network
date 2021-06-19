@@ -10,23 +10,12 @@ from django.http import JsonResponse
 import json
 from django.core.paginator import Paginator
 
-
-
 from .models import User, UserProfile, Post
 
 
-
-
-
-
-
 def index(request):
-    #print(len(list(Post.objects.all())))
-    #print(list(Post.objects.all()))
     entries = Post.objects.order_by('pk')
-    #print(entries)
     entries = entries.reverse()
-    #print(entries.reverse())
     if request.user.is_authenticated:
         userobj = User.objects.get(pk=request.user.id)
     else:
@@ -35,15 +24,12 @@ def index(request):
     ids = list(ids)
     ids.sort()
     ids.reverse()
-    #print (list(ids).sort())
     
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
         "ids":ids,
         "add_info":"all_posts"
-
-
     })
 
 
@@ -89,7 +75,7 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
-            # Harshita
+            # by Harshita
             new_profile = UserProfile(user=user,bio="Hey there! I am using network")
             print(new_profile)
             new_profile.save()
@@ -143,11 +129,8 @@ def profile(request,pid):
         show_follow_button = 0
     else:
         show_follow_button = 1   
-    #print(follows_you)
-    #print(posts)
     following = userobj.following.all()
     person_profile = userobj.profile
-    #followers = profile.followers
     
     return render(request, 'network/profile.html',{
         "posts":posts,
