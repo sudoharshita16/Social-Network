@@ -1,0 +1,39 @@
+[id='toggle-heart'] {
+    position: absolute;
+    left: -100vw;
+  }
+
+[for='toggle-heart'] {
+    color: #aab8c2;
+  }
+  
+  [id='toggle-heart']:checked + label {
+    color: #e2264d;
+  }  
+
+  [for='toggle-heart'] {
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+.likebuttonsmall{
+    font-size: 5px;
+    width: min-content;
+    height: 30px;
+    border-color: white;
+    background-color:white;
+    border-color: white;
+    text-decoration-color: #aab8c2;
+
+}
+
+.unlikebuttonsmall{
+  font-size: 5px;
+  width: min-content;
+  height: 30px;
+  fill: #e2264d;
+  text-decoration-color: #aab8c2;
+  flood-color: red;
+  background-color:white;
+  border-color: white;
+}

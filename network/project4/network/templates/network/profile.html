@@ -1,0 +1,82 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+    <h5>{{person_profile}}'s profile</h5>
+    {% if person_id != request.user.id %}
+    <h6>{{follows}}</h6>
+    {% endif %}
+
+
+    <ul>
+    {% if person_id != request.user.id %}
+        {% if show_follow_button == 1 %}
+           <div style="display:block;" id = "first">
+            <form id="follow">
+                {% csrf_token %}
+                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
+                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
+                
+                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
+             
+            </form>
+           </div>
+            
+       
+          <div style="display:none;" id = "second">
+            <form id="unfollow">
+                {% csrf_token %}
+                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
+                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
+            </form>   
+          </div>
+
+        {% else %}  
+          <div style="display:none;" id = "first">
+            <form id="follow">
+                {% csrf_token %}
+                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
+                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
+                
+                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
+             
+            </form>
+           </div>
+            
+       
+          <div style="display:block;" id = "second">
+            <form id="unfollow">
+                {% csrf_token %}
+                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
+                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
+            </form>   
+          </div>
+
+
+        {% endif %} 
+    {% endif %}  
+       
+    
+    <h6 id="nfollowers">Followers:{{nfollowers}}</h6><br>
+    <h6 id="nfollowing">Following:{{nfollowing}}</h6>
+    {% for post in posts %}
+    <li class="list-group-item">
+        {% if request.user.id == post.user.id %}
+        By <strong>you</strong><br>
+        {% else %}
+            By <strong>{{post.user}}</strong><br>
+        {% endif %}
+        {{post.data}}<br>
+        On {{post.time}}
+    </li>
+    {% endfor %}
+</ul>
+
+  
+{% endblock %}
+
+{% block script %}
+    <script  src="{% static 'network/follow.js' %}"></script>
+{% endblock %}
