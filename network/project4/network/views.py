@@ -25,7 +25,7 @@ def index(request):
         try:
             entries = paginator.page(request.GET.get("page")).object_list
             page_obj = paginator.get_page(request.GET.get("page"))
-            print(page_obj)
+            #print(page_obj)
         except:
             entries = paginator.page(1).object_list
             page_obj = paginator.get_page(1)
@@ -36,7 +36,7 @@ def index(request):
     ids = list(ids)
     ids.sort()
     ids.reverse()
-    print(page_obj)
+    #print(page_obj)
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
@@ -110,21 +110,7 @@ def create(request):
         username = User.objects.get(pk=request.user.id)
         p = Post(user=username, data=data,time=datetime.now())
         p.save()
-        userobj = User.objects.get(pk=request.user.id)
-        ids = Post.objects.values_list('pk', flat=True)  
-        ids = list(ids)
-        ids.sort()
-        ids.reverse()
-        entries = Post.objects.order_by('pk')
-        #print(entries)
-        entries = entries.reverse()
-        return render(request, "network/index.html",{
-            "entries":list(entries),
-            "userobj":userobj,
-            "ids":ids,
-            "add_info":"all_posts"
-
-        })
+        return HttpResponseRedirect(reverse("index"))
 
 def profile(request,pid):
     userobj = User.objects.get(pk=pid)
@@ -145,7 +131,7 @@ def profile(request,pid):
     following = userobj.following.all()
     person_profile = userobj.profile
     posts = posts.order_by('-pk')
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 3)
     if request.GET.get("page") != None:
         try:
             entries = paginator.page(request.GET.get("page")).object_list
@@ -188,10 +174,6 @@ def following_post(request):
         user_obj = person_obj.user
         following_posts = following_posts | user_obj.posts.all()
     
-    #ids = following_posts.values_list('pk', flat=True)  
-    #ids = list(ids)
-    #ids.sort()
-    #ids.reverse()
     entries = following_posts.order_by('-pk')
     paginator = Paginator(entries, 3)
 
@@ -206,19 +188,13 @@ def following_post(request):
     else:
         entries = paginator.page(1).object_list
         page_obj = paginator.get_page(1)
-        
+
     ids = entries.values_list('pk',flat = True)
     ids = list(ids)
     ids.sort()
     ids.reverse()
     print(page_obj)
 
-    #entries = p.page(page_no).object_list
-    #page_obj = p.get_page(page_no)
-    #ids = entries.values_list('pk', flat=True)
-    #ids = list(ids)
-    #ids.sort()
-    #ids.reverse()
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
