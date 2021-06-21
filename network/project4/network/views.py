@@ -144,16 +144,35 @@ def profile(request,pid):
         show_follow_button = 1   
     following = userobj.following.all()
     person_profile = userobj.profile
+    posts = posts.order_by('-pk')
+    paginator = Paginator(posts, 1)
+    if request.GET.get("page") != None:
+        try:
+            entries = paginator.page(request.GET.get("page")).object_list
+            page_obj = paginator.get_page(request.GET.get("page"))
+            print(page_obj)
+        except:
+            entries = paginator.page(1).object_list
+            page_obj = paginator.get_page(1)
+    else:
+        entries = paginator.page(1).object_list
+        page_obj = paginator.get_page(1)
+    ids = entries.values_list('pk',flat = True)
+    ids = list(ids)
+    ids.sort()
+    ids.reverse()
+    print(page_obj)
     
     return render(request, 'network/profile.html',{
-        "posts":posts,
+        "posts":entries,
          "nfollowing": following.count(),
         "nfollowers": followers.count(),
         "follows":follows_you,
         "person_profile": person_profile,
         "show_follow_button":show_follow_button,
         "puser":person_profile.user,
-        "person_id":userobj.id
+        "person_id":userobj.id,
+        "page_obj":page_obj
 
         })
        
