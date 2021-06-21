@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 fetch(`lval/${entry_id}`)  
                 .then(response => response.text())
                 .then(data=>{
-                    //console.log(data)
+                    console.log(data)
                     data = JSON.parse(data)
                     //console.log(data)
                     const likes = document.getElementById(`${form.elements[1].value}`);

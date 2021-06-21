@@ -17,6 +17,7 @@ urlpatterns = [
     path("profile/fval/<int:puser_id>", views.fval, name='fval'),
     path("like_unlike",views.like_unlike, name="like_unlike"),
     path("following_post/lval/<int:pid>",views.lval, name="lval"),
+    path("lval/<int:pid>",views.lval,name="lval"),
     path("eval/<int:pid>", views.eval, name="eval")
    
 ]
