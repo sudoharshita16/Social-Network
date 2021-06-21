@@ -20,16 +20,29 @@ def index(request):
         userobj = User.objects.get(pk=request.user.id)
     else:
         userobj = User.objects.get(pk=1)
-    ids = Post.objects.values_list('pk', flat=True)  
+    paginator = Paginator(entries, 3)
+    if request.GET.get("page") != None:
+        try:
+            entries = paginator.page(request.GET.get("page")).object_list
+            page_obj = paginator.get_page(request.GET.get("page"))
+            print(page_obj)
+        except:
+            entries = paginator.page(1).object_list
+            page_obj = paginator.get_page(1)
+    else:
+        entries = paginator.page(1).object_list
+        page_obj = paginator.get_page(1)
+    ids = entries.values_list('pk',flat = True)
     ids = list(ids)
     ids.sort()
     ids.reverse()
-    
+    print(page_obj)
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
         "ids":ids,
-        "add_info":"all_posts"
+        "add_info":"all_posts",
+        "page_obj":page_obj
     })
 
 

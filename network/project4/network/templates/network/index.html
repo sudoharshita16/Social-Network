@@ -17,20 +17,11 @@
 </form>
 </div>  
 <h2>All Posts</h2>
-{% endif %}
-{% if add_info == "following_posts" %}
-<h2>Followed posts</h2>
-   {% if entries|length == 0 %}
-      You haven't followed any people yet!
-   {% endif %}
-{% endif %}
-
-
 <div class="pagination">
   <span class="step-links">
       {% if page_obj.has_previous %}
-          <a href="{% url 'following_post' 1 %}">&laquo; first</a>
-          <a href="{% url 'following_post' page_obj.previous_page_number %}">previous</a>
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{page_obj.previous_page_number}}">previous</a>
       {% endif %}
 
       <span class="current">
@@ -38,11 +29,39 @@
       </span>
 
       {% if page_obj.has_next %}
-          <a href="{% url 'following_post' page_obj.next_page_number %}">next</a>
-          <a href="{% url 'following_post' page_obj.paginator.num_pages %}">last &raquo;</a>
+          <a href="?page={{page_obj.next_page_number}}">next</a>
+          <a href="?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
       {% endif %}
   </span>
 </div>
+
+{% endif %}
+{% if add_info == "following_posts" %}
+<h2>Followed posts</h2>
+   {% if entries|length == 0 %}
+      You haven't followed any people yet!
+   {% endif %}
+   <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="{% url 'following_post' 1 %}">&laquo; first</a>
+            <a href="{% url 'following_post' page_obj.previous_page_number %}">previous</a>
+        {% endif %}
+  
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+  
+        {% if page_obj.has_next %}
+            <a href="{% url 'following_post' page_obj.next_page_number %}">next</a>
+            <a href="{% url 'following_post' page_obj.paginator.num_pages %}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+  
+{% endif %}
+
+
 
 <h3 style="display:block;">{{ids}}</h3>
 <i class="far fa-heart"></i>
