@@ -177,7 +177,7 @@ def profile(request,pid):
         })
        
 
-def following_post(request,page_no):
+def following_post(request):
     following_posts = Post.objects.none()
     userobj = User.objects.get(pk=request.user.id)
     userprofile = userobj.profile
@@ -188,20 +188,37 @@ def following_post(request,page_no):
         user_obj = person_obj.user
         following_posts = following_posts | user_obj.posts.all()
     
-    ids = following_posts.values_list('pk', flat=True)  
+    #ids = following_posts.values_list('pk', flat=True)  
+    #ids = list(ids)
+    #ids.sort()
+    #ids.reverse()
+    entries = following_posts.order_by('-pk')
+    paginator = Paginator(entries, 3)
+
+    if request.GET.get("page") != None:
+        try:
+            entries = paginator.page(request.GET.get("page")).object_list
+            page_obj = paginator.get_page(request.GET.get("page"))
+            print(page_obj)
+        except:
+            entries = paginator.page(1).object_list
+            page_obj = paginator.get_page(1)
+    else:
+        entries = paginator.page(1).object_list
+        page_obj = paginator.get_page(1)
+        
+    ids = entries.values_list('pk',flat = True)
     ids = list(ids)
     ids.sort()
     ids.reverse()
-    entries = following_posts.order_by('pk')
-    #print(entries)
-    entries = entries.reverse()
-    p = Paginator(entries, 3)
-    entries = p.page(page_no).object_list
-    page_obj = p.get_page(page_no)
-    ids = entries.values_list('pk', flat=True)
-    ids = list(ids)
-    ids.sort()
-    ids.reverse()
+    print(page_obj)
+
+    #entries = p.page(page_no).object_list
+    #page_obj = p.get_page(page_no)
+    #ids = entries.values_list('pk', flat=True)
+    #ids = list(ids)
+    #ids.sort()
+    #ids.reverse()
     return render(request, "network/index.html",{
         "entries":list(entries),
         "userobj":userobj,
