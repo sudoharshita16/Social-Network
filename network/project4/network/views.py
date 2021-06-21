@@ -20,7 +20,7 @@ def index(request):
         userobj = User.objects.get(pk=request.user.id)
     else:
         userobj = User.objects.get(pk=1)
-    paginator = Paginator(entries, 3)
+    paginator = Paginator(entries, 10)
     if request.GET.get("page") != None:
         try:
             entries = paginator.page(request.GET.get("page")).object_list
@@ -131,7 +131,7 @@ def profile(request,pid):
     following = userobj.following.all()
     person_profile = userobj.profile
     posts = posts.order_by('-pk')
-    paginator = Paginator(posts, 3)
+    paginator = Paginator(posts, 10)
     if request.GET.get("page") != None:
         try:
             entries = paginator.page(request.GET.get("page")).object_list
@@ -175,7 +175,7 @@ def following_post(request):
         following_posts = following_posts | user_obj.posts.all()
     
     entries = following_posts.order_by('-pk')
-    paginator = Paginator(entries, 3)
+    paginator = Paginator(entries, 10)
 
     if request.GET.get("page") != None:
         try:
