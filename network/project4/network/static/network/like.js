@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded',function(){
     console.log(arr);
     
     document.querySelectorAll('.likeunlike').forEach(function(form){
+        console.log("Invaded")
         form.onsubmit = function(){
+            console.log("Submitted")
             const entry_id = form.elements[1].value;
             fetch('/like_unlike',{
                 method:'POST',
@@ -30,8 +32,8 @@ document.addEventListener('DOMContentLoaded',function(){
                     var one;
                     var two;
                     document.querySelectorAll('.one').forEach(function(value){
-                        console.log(arr[count]);
-                        console.log(entry_id);
+                        //console.log(arr[count]);
+                        //console.log(entry_id);
                         if (arr[count] == entry_id){
                             //console.log("true")
                             one = value;
@@ -42,8 +44,8 @@ document.addEventListener('DOMContentLoaded',function(){
                     //console.log(one);
                     count = 0;
                     document.querySelectorAll('.two').forEach(function(value){
-                        console.log(count);
-                        console.log(entry_id)
+                        //console.log(count);
+                        //console.log(entry_id)
                         if (arr[count] == entry_id){
                             //console.log("true")
                             two = value;
@@ -62,8 +64,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     }
                     else if (form.elements["liked"].value === "no"){
                         form.elements["liked"].value = "yes";
-                        one.style.display = 'block';
                         two.style.display = 'none';
+                        one.style.display = 'block';
+                        
                     }    
 
                 })
