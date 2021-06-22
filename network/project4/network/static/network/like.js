@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded',function(){
     console.log(arr);
     
     document.querySelectorAll('.likeunlike').forEach(function(form){
-        console.log("Invaded")
+        //console.log("Invaded")
         form.onsubmit = function(){
-            console.log("Submitted")
+            //console.log("Submitted")
             const entry_id = form.elements[1].value;
             fetch('/like_unlike',{
                 method:'POST',
