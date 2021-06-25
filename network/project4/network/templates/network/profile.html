@@ -75,10 +75,10 @@
     {% endif %}  
        
     
-    <h6 id="nfollowers">Followers:{{nfollowers}}</h6><br>
-    <h6 id="nfollowing">Following:{{nfollowing}}</h6>
+    <h6 id="nfollowers"><strong>Followers: </strong>{{nfollowers}}</h6><br>
+    <h6 id="nfollowing"><strong>Following: </strong>{{nfollowing}}</h6>
     {% for post in posts %}
-    <li class="list-group-item">
+    <li class="list-group-item list-group-item-action list-group-item-warning">
         {% if request.user.id == post.user.id %}
         By <strong>you</strong><br>
         {% else %}
