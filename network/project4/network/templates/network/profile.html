@@ -3,13 +3,79 @@
 
 {% block body %}
 
+    <div class="row">
+        <div class="col-sm-3 user-logo"><i class="fa-solid fa-user"></i></div>
+        <div class="col-sm-9">
+            <div class="row sub-row">
+                <div class="col-sm-3 user-name">
+                    {{person_profile|title}}
+                </div>
+                <div class="col-sm-9 user-follow">
+                    {% if person_id != request.user.id %}
+                        {% if show_follow_button == 1 %}
+                        <div style="display:block;" id = "first">
+                            <form id="follow">
+                                {% csrf_token %}
+                                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
+                                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
+                                
+                                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
+                            
+                            </form>
+                        </div>
+                            
+                    
+                        <div style="display:none;" id = "second">
+                            <form id="unfollow">
+                                {% csrf_token %}
+                                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
+                                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
+                            </form>   
+                        </div>
 
-    <h5>{{person_profile}}'s profile</h5>
-    {% if person_id != request.user.id %}
+                        {% else %}  
+                        <div style="display:none;" id = "first">
+                            <form id="follow">
+                                {% csrf_token %}
+                                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
+                                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
+                                
+                                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
+                            
+                            </form>
+                        </div>
+                            
+                    
+                        <div style="display:block;" id = "second">
+                            <form id="unfollow">
+                                {% csrf_token %}
+                                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
+                                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
+                            </form>   
+                        </div>
+
+
+                        {% endif %} 
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row sub-row-two">
+                <div class="col-sm-3 user-followers">
+                    <strong>{{nfollowers}}</strong> Followers
+                </div>
+                <div class="col-sm-3 user-followers">
+                    <strong>{{nfollowing}}</strong> Following
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h6 id="nfollowers" style="display: none"><strong>Followers: </strong>{{nfollowers}}</h6>
+    {% comment %} {% if person_id != request.user.id %}
     <h6>{{follows}}</h6>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
-    <div class="pagination">
+    {% comment %} <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1">&laquo; first</a>
@@ -25,67 +91,22 @@
                 <a href="?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
             {% endif %}
         </span>
-      </div>
+      </div> {% endcomment %}
     <ul>
-    {% if person_id != request.user.id %}
-        {% if show_follow_button == 1 %}
-           <div style="display:block;" id = "first">
-            <form id="follow">
-                {% csrf_token %}
-                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
-                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
-                
-                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
-             
-            </form>
-           </div>
-            
-       
-          <div style="display:none;" id = "second">
-            <form id="unfollow">
-                {% csrf_token %}
-                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
-                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
-            </form>   
-          </div>
-
-        {% else %}  
-          <div style="display:none;" id = "first">
-            <form id="follow">
-                {% csrf_token %}
-                <input type="hidden" id="puser_id" name="puser_id" value="{{puser.id}}">
-                <input type="hidden" id="followers" name="followers" value="{{nfollowers}}">
-                
-                <input type="submit" value=" Follow  " class="btn btn-primary btn-sm">
-             
-            </form>
-           </div>
-            
-       
-          <div style="display:block;" id = "second">
-            <form id="unfollow">
-                {% csrf_token %}
-                <input type="hidden" id="custId" name="Follow_unfollow" value="unfollow">
-                <input type="submit" value="Unfollow" class="btn btn-secondary btn-sm">
-            </form>   
-          </div>
-
-
-        {% endif %} 
-    {% endif %}  
+      
        
     
-    <h6 id="nfollowers"><strong>Followers: </strong>{{nfollowers}}</h6><br>
-    <h6 id="nfollowing"><strong>Following: </strong>{{nfollowing}}</h6>
+    {% comment %} <h6 id="nfollowers"><strong>Followers: </strong>{{nfollowers}}</h6><br>
+    <h6 id="nfollowing"><strong>Following: </strong>{{nfollowing}}</h6> {% endcomment %}
     {% for post in posts %}
-    <li class="list-group-item list-group-item-action list-group-item-warning">
+    <li class="profile-posts">
         {% if request.user.id == post.user.id %}
-        By <strong>you</strong><br>
+        By <strong>You</strong><br>
         {% else %}
-            By <strong>{{post.user}}</strong><br>
+            By <strong>{{post.user|title}}</strong><br>
         {% endif %}
         {{post.data}}<br>
-        On {{post.time}}
+         <p class="date">On {{post.time}}</p>
     </li>
     {% endfor %}
 </ul>

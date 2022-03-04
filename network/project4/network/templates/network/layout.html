@@ -8,47 +8,69 @@
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
         {% block script %}
         {% endblock %}
 
             
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Network</a>
-          
-            <div class="container-fluid">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% if user.is_authenticated %}
-                    <li class="navbar-brand">
-                        <a class="navbar-brand" href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="navbar-brand">
-                  <a class="navbar-brand" href="{% url 'index' %}">All Posts</a>
+          <!--   navbar starts here-->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #272727">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active logo" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'index' %}"><i class="fa-solid fa-dove"></i></i> Network <span class="sr-only">(current)</span></a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="navbar-brand">
-                        <a class="navbar-brand" href="{% url 'following_post' %}">Following</a>
-                    </li>
-                    <li class="navbar-brand">
-                        <a class="navbar-brand" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="navbar-brand">
-                        <a class="navbar-brand" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="navbar-brand">
-                        <a class="navbar-brand" href="{% url 'register' %}">Register</a>
-                    </li>
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username | title }}</strong></a>
+                </li>
                 {% endif %}
+
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                </li>
+                
+                {% if user.is_authenticated %}
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'following_post' %}">Following</a>
+                </li>
+                {% endif %}
+
+
+
+                
               </ul>
+              {% if user.is_authenticated %}
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                      <a href="{% url 'logout' %}" class="nav-link">Log Out <i class="fas fa-sign-in-alt"></i></a>
+                  </li>
+              </ul>
+              {% else %}
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                    <a href="{% url 'register' %}" class="nav-link">Register </a>
+                </li>
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                    <a href="{% url 'login' %}" class="nav-link">Log In <i class="fas fa-sign-in-alt"></i></a>
+                </li>
+            </ul>
+            {% endif %}
             </div>
           </nav>
+  <!--    navbar ends here-->
         
-        <div class="body">
+        <div class="body container">
             {% block body %}
             {% endblock %}
         </div>

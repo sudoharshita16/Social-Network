@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap');
+
 [id='toggle-heart'] {
     position: absolute;
     left: -100vw;
@@ -39,8 +41,250 @@
 }
 
 
-body{
+/* body{
   background-color:#e2264d;
   background-image: url("https://i.pinimg.com/originals/3c/15/93/3c159314b68b1e73d9b5cf6c2de2e9d3.jpg");
   width: 100%;
+} */
+
+html,body
+{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+  background-color: #1a1b1b;
 }
+
+
+
+
+.body {
+  border-style: solid;
+  border-width: 1px;
+  border-bottom-width: 0px;
+  padding: 120px;
+  padding-top: 100px;
+  border-color: rgb(61, 61, 61);
+}
+
+.logo{
+  /*    margin: -4px*/
+  /*    border-radius: 5px;*/
+      box-sizing: content-box;
+      margin-top: -7px;
+      margin-bottom: -7px;
+      padding-top: 1px;
+      font-size: 22px;
+  }
+  
+  .logo:hover{
+      background-color: #3b3b3b;
+  }
+  
+  .nav_opt{
+      border-radius: 8px;
+  }
+  
+  .nav_opt:hover{
+      background-color: #3b3b3b;
+  }
+  
+  .textarea{
+    margin-left: 20px;
+    background-color: #1a1b1b;
+    border: none;
+    color:#d4d4d4;
+    font-size: 20px;
+    width: 850px;
+    outline: none;
+    height:80px;
+  }
+
+
+  .submit-btn{
+    margin-left: 800px;
+  }
+
+
+  h2{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #d4d4d4;
+  }
+
+  .li_parent {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .li_item {
+    background-color: #1a1b1b;
+    border: none;
+    list-style-type: none;
+    color: #d4d4d4;
+  }
+
+  
+  .user_name {
+    font-size: 25px;
+    color: #d4d4d4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .user_name:visited {
+    font-size: 25px;
+    color: #d4d4d4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .user_name:hover {
+    font-size: 25px;
+    color: #d4d4d4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .user_name:ac {
+    font-size: 25px;
+    color: #d4d4d4;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+
+  .fa-user {
+    font-size: 21px;
+    margin-right: 10px;
+  }
+  /* .li_item:hover {
+    background-color: #1a1b1b;
+    border: none;
+  } */
+
+  .para {
+    font-size: 18px;
+    margin: 3px;
+    margin-left: 35px;
+  }
+
+
+  .small_textarea {
+    margin-left: 20px;
+    background-color: #1a1b1b;
+    border: none;
+    color:#d4d4d4;
+    font-size: 18px;
+    width: 850px;
+    outline: none;
+    height:80px;
+    margin: 3px;
+    margin-left: 33px;
+    margin-top: -23px;
+  }
+
+
+  .under {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #aab8c2;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .itemm {
+    margin-top: 20px;
+    margin-left: 35px;
+  }
+
+  .button-like {
+    background-color: #1a1b1b;
+    border: none;
+    color: #aab8c2;
+    font-size: 16px;
+  }
+
+  .post-button {
+    margin-left: 35px;
+    /* margin-top: 4px; */
+    margin-bottom: 14px;
+  }
+
+
+  .users {
+    text-align: center;
+    font-size: 80px;
+  }
+
+  .user-form {
+    width: 32vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3b3b3b;
+    padding: 5vw;
+    border-radius: 5px;
+    padding-top: 2vw;
+  }
+
+  .form-control {
+    width: 100%;
+    border: none;
+  }
+
+  .user-end {
+    margin-top: 20px;
+    color: #d4d4d4;
+  }
+
+/* profile part starts here */
+  .user-logo i{
+    font-size: 100px;
+    color: #d4d4d4;
+  }
+
+  .user-logo {
+    text-align: center;
+  }
+
+  .user-name{ 
+    text-align: left;
+    color: #d4d4d4;
+    font-size: 30px;
+  }
+
+  .user-follow {
+    text-align: left;
+    margin-top: 7px;
+    /* margin-left: auto; */
+  }
+
+  .sub-row {
+    width: 800px;
+  }
+
+  .user-followers {
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    color: #d4d4d4;
+    margin-top: 15px;
+  }
+
+  .sub-row-two {
+    width: 600px;
+  }
+
+
+  .profile-posts {
+    margin-top: 50px;
+    list-style: none;
+    color: #d4d4d4;
+  }
+
+  .date {
+    font-size: 15px;
+    margin-top: 15px;
+    font-family: 'Lato', sans-serif;
+  }
