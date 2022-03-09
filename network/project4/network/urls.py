@@ -18,6 +18,7 @@ urlpatterns = [
     path("like_unlike",views.like_unlike, name="like_unlike"),
     path("following_post/lval/<int:pid>",views.lval, name="lval"),
     path("lval/<int:pid>",views.lval,name="lval"),
-    path("eval/<int:pid>", views.eval, name="eval")
+    path("eval/<int:pid>", views.eval, name="eval"),
+    # path("prof",views.prof,name="prof")
    
 ]

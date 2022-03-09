@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log(data)
 
         const current_followers = document.querySelector("#nfollowers");
-        current_followers.innerHTML = `Followers:${data.followers_count}`;
+        current_followers.innerHTML = `${data.followers_count} Followers`;
         document.querySelector('#second').style.display = 'block';
         document.querySelector('#first').style.display = 'none';
     
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
             data = JSON.parse(data)
             console.log(data)
         const current_followers = document.querySelector("#nfollowers");
-        current_followers.innerHTML = `Followers:${data.followers_count}`;
+        current_followers.innerHTML = `${data.followers_count} Followers`;
         document.querySelector('#first').style.display = 'block';
         document.querySelector('#second').style.display = 'none';
     

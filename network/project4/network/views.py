@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse
 from datetime import datetime
 from django.urls import reverse
@@ -9,7 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from django.core.paginator import Paginator
-
+# from django.core.files.storage import FileSystemStorage
+from django import forms
 from .models import User, UserProfile, Post
 
 
@@ -105,17 +106,36 @@ def register(request):
 def create(request):
     if request.method == "POST":
         data = request.POST["data"]
+        img = request.FILES["img"]
         print(request.user)
         print(request.user.id)
         username = User.objects.get(pk=request.user.id)
-        p = Post(user=username, data=data,time=datetime.now())
+        p = Post(user=username, data=data,time=datetime.now(),post_image=img)
         p.save()
         return HttpResponseRedirect(reverse("index"))
 
+# def prof(request):
+#     print("called prof")
+#     if request.method == "POST":
+#         img = request.FILES["img"]
+#         pro = UserProfile.objects.get(pk=request.user.id)
+#         print(pro)
+#         pro.profile_pic=img
+#         pro.save()
+#         print("done")
+#         return HttpResponseRedirect(reverse("index"))
+
+
+
 def profile(request,pid):
     userobj = User.objects.get(pk=pid)
+    # userobjPro = UserProfile.objects.get(pk=pid)
     userprofile = userobj.profile
+    profilePic = None
+    if(userprofile.profile_pic):
+        profilePic = userprofile.profile_pic.url
     posts = userobj.posts.all() 
+    bio = userprofile.bio
     thisuserobj = User.objects.get(pk=request.user.id)
     thisuserprofile = thisuserobj.profile
     if userobj in thisuserprofile.followers.all():
@@ -158,7 +178,9 @@ def profile(request,pid):
         "show_follow_button":show_follow_button,
         "puser":person_profile.user,
         "person_id":userobj.id,
-        "page_obj":page_obj
+        "page_obj":page_obj,
+        "profilePicUrl":profilePic,
+        "bio":bio
 
         })
        

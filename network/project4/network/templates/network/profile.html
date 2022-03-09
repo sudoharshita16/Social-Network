@@ -4,7 +4,13 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-sm-3 user-logo"><i class="fa-solid fa-user"></i></div>
+        <div class="col-sm-3 user-logo">
+            {% if  profilePicUrl %}
+                <img src="{{profilePicUrl}}" class="profilePic" alt="img">
+            {% else %}
+                <i class="fa-solid fa-user"></i>
+            {% endif %}
+        </div>
         <div class="col-sm-9">
             <div class="row sub-row">
                 <div class="col-sm-3 user-name">
@@ -55,7 +61,12 @@
                         </div>
 
 
-                        {% endif %} 
+                        {% endif %}
+                    {% comment %} {% else %}
+                        <form action = "{% url 'prof' %}" id='prof' method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" id="profile" name="img" class="inputprof" onchange="form.submit()" accept="image/*">
+                            <label for="profile">Upload Image</i></label> {% endcomment %}
                     {% endif %}
                 </div>
             </div>
@@ -67,10 +78,13 @@
                     <p id="nfollowers"><strong>{{nfollowing}}</strong> Following</p>
                 </div>
             </div>
+            <div class="row sub-row-three">
+                {{bio}}
+            </div>
         </div>
     </div>
 
-    <h6 id="nfollowers" style="display: none"><strong>Followers: </strong>{{nfollowers}}</h6>
+    {% comment %} <h6 id="nfollowers" style="display: none"><strong>Followers: </strong>{{nfollowers}}</h6> {% endcomment %}
     {% comment %} {% if person_id != request.user.id %}
     <h6>{{follows}}</h6>
     {% endif %} {% endcomment %}
@@ -94,7 +108,7 @@
       </div> {% endcomment %}
     <ul>
       
-       
+    <hr style="border-color:rgb(61, 61, 61)">
     
     {% comment %} <h6 id="nfollowers"><strong>Followers: </strong>{{nfollowers}}</h6><br>
     <h6 id="nfollowing"><strong>Following: </strong>{{nfollowing}}</h6> {% endcomment %}
@@ -106,6 +120,9 @@
             By <strong>{{post.user|title}}</strong><br>
         {% endif %}
         {{post.data}}<br>
+        {% if post.post_image%}
+        <img src="{{post.post_image.url}}" class="postProImg" alt="image">
+        {% endif %}
          <p class="date">On {{post.time}}</p>
     </li>
     {% endfor %}

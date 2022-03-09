@@ -104,7 +104,7 @@ html,body
 
 
   .submit-btn{
-    margin-left: 800px;
+    margin-left: 366px;
   }
 
 
@@ -155,7 +155,7 @@ html,body
     font-weight: bold;
   }
 
-
+  
   .fa-user {
     font-size: 21px;
     margin-right: 10px;
@@ -164,13 +164,28 @@ html,body
     background-color: #1a1b1b;
     border: none;
   } */
-
+  
   .para {
     font-size: 18px;
     margin: 3px;
     margin-left: 35px;
   }
+  
+  .postImg {
+    width: 40%;
+    border-radius: 20px;
+    margin: 3px;
+    margin-top: 12px;
+    margin-left: 35px;
+  }
 
+  .postProImg {
+    width: 40%;
+    border-radius: 20px;
+    margin: 3px;
+    margin-top: 12px;
+    /* margin-left: 35px; */
+  }
 
   .small_textarea {
     margin-left: 20px;
@@ -276,6 +291,11 @@ html,body
     width: 600px;
   }
 
+  .sub-row-three {
+    margin-left: 0px;
+    color: #d4d4d4;
+  }
+
 
   .profile-posts {
     margin-top: 50px;
@@ -288,3 +308,82 @@ html,body
     margin-top: 15px;
     font-family: 'Lato', sans-serif;
   }
+
+  .profilePic {
+    width: 140px;
+    border-radius: 50%;
+  }
+
+
+
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    /* background-color: #5cb85c; */
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    margin: 0px;
+    padding: 3px;
+    padding-left: 21px;
+    padding-right: 30px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    /* background-color: #5cb85c; */
+    border: none;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+
+
+.inputprof {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputprof + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  /* background-color: #5cb85c; */
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  margin: 0px;
+  padding: 3px;
+  padding-left: 21px;
+  padding-right: 30px;
+  color: #1a1b1b;
+  background-color: #d4d4d4;
+  margin-left: -48px;
+  font-size: 14px;
+}
+
+.inputprof:focus + label,
+.inputprof + label:hover {
+  /* background-color: #5cb85c; */
+  border: none;
+}
+
+.inputprof + label {
+cursor: pointer; /* "hand" cursor */
+}
+
