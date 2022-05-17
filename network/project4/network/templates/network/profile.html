@@ -62,11 +62,20 @@
 
 
                         {% endif %}
-                    {% comment %} {% else %}
+                    {% else %}
+                        {% comment %} <form action = "{% url 'prof' %}" id='prof' method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit">Upload</button>
+                            <input type="file" id="profile" name="img" class="inputprof" onchange="form.submit()" accept="image/*">
+                            <label for="profile">Upload Image</i></label> 
+                        </form>{% endcomment %}
+                    
                         <form action = "{% url 'prof' %}" id='prof' method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="file" id="profile" name="img" class="inputprof" onchange="form.submit()" accept="image/*">
-                            <label for="profile">Upload Image</i></label> {% endcomment %}
+                            <input type="file" id="profile" name="profile_pic" class="inputprof" onchange="form.submit()" accept="image/*">
+                            <label for="profile">Upload Image</i></label> 
+                        </form>
                     {% endif %}
                 </div>
             </div>

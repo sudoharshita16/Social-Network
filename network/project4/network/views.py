@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -105,29 +106,59 @@ def register(request):
 #@login_required not working properly rn
 def create(request):
     if request.method == "POST":
+        username = User.objects.get(pk=request.user.id)
         data = request.POST["data"]
-        img = request.FILES["img"]
+        try:
+            img = request.FILES["img"]
+            p = Post(user=username, data=data,time=datetime.now(),post_image=img)
+        except:
+            p = Post(user=username, data=data,time=datetime.now())
         print(request.user)
         print(request.user.id)
-        username = User.objects.get(pk=request.user.id)
-        p = Post(user=username, data=data,time=datetime.now(),post_image=img)
         p.save()
         return HttpResponseRedirect(reverse("index"))
 
 # def prof(request):
-#     print("called prof")
-#     if request.method == "POST":
-#         img = request.FILES["img"]
-#         pro = UserProfile.objects.get(pk=request.user.id)
-#         print(pro)
-#         pro.profile_pic=img
-#         pro.save()
-#         print("done")
-#         return HttpResponseRedirect(reverse("index"))
+#     # print("called prof")
+#     # if request.method == "POST":
+#     #     img = request.FILES["img"]
+#     #     pro = UserProfile.objects.get(pk=request.user.id)
+#     #     print(pro)
+#     #     pro.profile_pic=img
+#     #     pro.save()
+#     #     print("done")
+#     #     return HttpResponseRedirect(reverse("index"))
+
+#     if request.method == 'POST':
+#         form = profilePicUploadForm(request.POST, request.FILES)
+  
+#         if form.is_valid():
+#             img = form.cleaned_data['profile_pic']
+#             userId = User.objects.get(pk=request.user.id)
+#             userProfileAccess = userId.profile
+#             # print(pro)
+#             userProfileAccess.profile_pic=img
+#             userProfileAccess.save()
+
+            # form.save()
+
+class profilePicUploadForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['profile_pic']
 
 
+def profile(request,pid=None):
+    if request.method == 'POST':
+        img = request.FILES['profile_pic']
+        pid = request.user.id
+        userId = User.objects.get(pk=pid)
+        userProfileAccess = userId.profile
+        # print(pro)
+        userProfileAccess.profile_pic=img
+        userProfileAccess.save()
 
-def profile(request,pid):
     userobj = User.objects.get(pk=pid)
     # userobjPro = UserProfile.objects.get(pk=pid)
     userprofile = userobj.profile
@@ -180,7 +211,8 @@ def profile(request,pid):
         "person_id":userobj.id,
         "page_obj":page_obj,
         "profilePicUrl":profilePic,
-        "bio":bio
+        "bio":bio,
+        'form': profilePicUploadForm(),
 
         })
        
@@ -290,7 +322,8 @@ def unfollow(request):
 
 def fval(request, puser_id):
     #print("reached fval functions")
-    puser_profile = UserProfile.objects.get(id=puser_id)
+    puser_profile = User.objects.get(id=puser_id)
+    puser_profile = puser_profile.profile
     #print(puser_profile)
     followers = list(puser_profile.followers.all())
     #print(followers)
