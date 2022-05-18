@@ -9,9 +9,6 @@
     </style>
 
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
 
     <form action="{% url 'register' %}" class="user-form" method="post">
         <h2 class="users"><i class="fa-solid fa-users"></i></h2>
@@ -32,6 +29,11 @@
         <div class="user-end">
             Already have an account? <a href="{% url 'login' %}">Log In here.</a>
         </div>
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
     </form>
 
     

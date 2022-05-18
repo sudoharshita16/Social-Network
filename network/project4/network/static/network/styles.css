@@ -387,3 +387,11 @@ html,body
 cursor: pointer; /* "hand" cursor */
 }
 
+
+
+
+/* alert message */
+
+.alert {
+  margin-top: 20px; 
+}

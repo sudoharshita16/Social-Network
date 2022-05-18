@@ -10,9 +10,7 @@
 
     
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+    
 
     <form action="{% url 'login' %}" class="user-form" method="post">
         <h2 class="users"><i class="fa-solid fa-users"></i></h2>
@@ -27,6 +25,11 @@
         <div class="user-end">
             Don't have an account? <a href="{% url 'register' %}">Register here.</a>
         </div>
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
     </form>
 
 
