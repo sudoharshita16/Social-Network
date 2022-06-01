@@ -65,7 +65,22 @@
     <ul class="li_parent">
     {% for entry in entries %}
         <li style="" class="li_item">
-          <a href="{% url 'profile' entry.user.id %}" class="user_name"><i class="fa-solid fa-user"></i>{{entry.user|title }}</a><br>
+          {% comment %} <a href="{% url 'profile' entry.user.id %}" class="user_name">
+            <i class="fa-solid fa-user"></i>{{entry.user|title }}</a> {% endcomment %}
+
+
+            <a href="{% url 'profile' entry.user.id %}" class="col-sm-3 user_name">
+              {% if entry.user.profile.profile_pic %}
+              <img src="{{entry.user.profile.profile_pic.url}}" class="profilePicSide" alt="img">
+              {% else %}
+              <i class="fa-solid fa-user"></i>
+              {% endif %}
+              {{entry.user|title }}
+            </a>
+            <br>
+            {% comment %} <h1>
+              {{entry.user.profile.bio}}                well this worked, i was not expecting this 
+            </h1> {% endcomment %}
               <div class="view_one">
                 <div class = "para lead" >{{entry.data}}</div>
                 {% if  entry.post_image%}
