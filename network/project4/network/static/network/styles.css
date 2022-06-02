@@ -432,3 +432,7 @@ cursor: pointer; /* "hand" cursor */
   font-weight: bold;
   margin-top: 5px;
 }
+
+.defaultCursor:hover {
+  cursor:default;
+}

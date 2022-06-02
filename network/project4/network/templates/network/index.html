@@ -68,7 +68,7 @@
           {% comment %} <a href="{% url 'profile' entry.user.id %}" class="user_name">
             <i class="fa-solid fa-user"></i>{{entry.user|title }}</a> {% endcomment %}
 
-
+            {% if user.is_authenticated %}      <!-- so if user is not logged in he should not be able to browser other user's profile -->
             <a href="{% url 'profile' entry.user.id %}" class="col-sm-3 user_name">
               {% if entry.user.profile.profile_pic %}
               <img src="{{entry.user.profile.profile_pic.url}}" class="profilePicSide" alt="img">
@@ -76,6 +76,16 @@
               <i class="fa-solid fa-user"></i>
               {% endif %}
               {{entry.user|title }}
+            </a>
+            {% else %}
+            <a href="#" class="col-sm-3 user_name defaultCursor">
+              {% if entry.user.profile.profile_pic %}
+              <img src="{{entry.user.profile.profile_pic.url}}" class="profilePicSide" alt="img">
+              {% else %}
+              <i class="fa-solid fa-user"></i>
+              {% endif %}
+              {{entry.user|title }}
+            {% endif %}
             </a>
             <br>
             {% comment %} <h1>
