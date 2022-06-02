@@ -52,6 +52,9 @@
               </ul>
               {% if user.is_authenticated %}
               <ul class="navbar-nav ml-auto">
+                  {% comment %} <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                    <a href="#" class="nav-link" onclick="show()">Notifications <i class="fa-solid fa-bell"></i></a>
+                  </li> {% endcomment %}
                   <li class="nav-item active nav_opt" style="margin-left: 8px;">
                       <a href="{% url 'logout' %}" class="nav-link">Log Out <i class="fas fa-sign-in-alt"></i></a>
                   </li>
@@ -69,6 +72,16 @@
             </div>
           </nav>
   <!--    navbar ends here-->
+
+
+  <!-- notifications box starts here -->
+          
+          <div id="notificationBox">
+            <h2>Notifications</h2>
+          </div>
+
+      
+          <script  src="{% static 'network/notificationBox.js' %}"></script>
         
         <div class="body container">
             {% block body %}
