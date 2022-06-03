@@ -30,21 +30,10 @@
                 <li class="nav-item active logo" style="margin-left: 8px;">
                   <a class="nav-link" href="{% url 'index' %}"><i class="fa-solid fa-dove"></i></i> Network <span class="sr-only">(current)</span></a>
                 </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item active nav_opt" style="margin-left: 8px;">
-                  <a class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username | title }}</strong></a>
-                </li>
-                {% endif %}
-
-                <li class="nav-item active nav_opt" style="margin-left: 8px;">
-                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
-                </li>
-                
-                {% if user.is_authenticated %}
-                <li class="nav-item active nav_opt" style="margin-left: 8px;">
-                  <a class="nav-link" href="{% url 'following_post' %}">Following</a>
-                </li>
-                {% endif %}
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2 searchBar" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0 searchButton" type="submit">Search</button>
+                </form>
 
 
 
@@ -52,6 +41,12 @@
               </ul>
               {% if user.is_authenticated %}
               <ul class="navbar-nav ml-auto">
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'profile' user.id %}"><strong>{{ user.username | title }}</strong></a>
+                </li>
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'following_post' %}">Following</a>
+                </li>
                   {% comment %} <li class="nav-item active nav_opt" style="margin-left: 8px;">
                     <a href="#" class="nav-link" onclick="show()">Notifications <i class="fa-solid fa-bell"></i></a>
                   </li> {% endcomment %}
@@ -61,6 +56,9 @@
               </ul>
               {% else %}
               <ul class="navbar-nav ml-auto">
+                <li class="nav-item active nav_opt" style="margin-left: 8px;">
+                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                </li>
                 <li class="nav-item active nav_opt" style="margin-left: 8px;">
                     <a href="{% url 'register' %}" class="nav-link">Register </a>
                 </li>
