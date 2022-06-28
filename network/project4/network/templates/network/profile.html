@@ -87,10 +87,32 @@
                     <p id="nfollowers"><strong>{{nfollowing}}</strong> Following</p>
                 </div>
             </div>
-            <div class="row sub-row-three">
-                {{bio}}
+            <div style="display: none;" class="edit_bio_one" >
+                <form id="edit_bio_form">
+                  {% csrf_token %} 
+                  <div class="form-group w-25">
+                    <label for="posting"></label>
+                    <textarea type="text" class="small_textarea" id ="bio_data"  class="form-control" >{{bio}}</textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <input type="submit" id="edit_bio_button" class="btn btn-success editbio-button"></button>
+                    </div>    
+                  </div>
+                </form>
+            </div> 
+            <div style="display:block" class = "edit_bio_two">
+                {% if person_id == request.user.id%}
+              <button type="submit" id="bio"> 
+                <i class="lni lni-pencil"></i>
+              </button>
+              <div id="bio_text"style="color:white">{{bio}}</div>
+            {% endif %}
             </div>
-        </div>
+             
+           
+
+        
     </div>
 
     {% comment %} <h6 id="nfollowers" style="display: none"><strong>Followers: </strong>{{nfollowers}}</h6> {% endcomment %}

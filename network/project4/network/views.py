@@ -113,8 +113,8 @@ def create(request):
             p = Post(user=username, data=data,time=datetime.now(),post_image=img)
         except:
             p = Post(user=username, data=data,time=datetime.now())
-        print(request.user)
-        print(request.user.id)
+        #print(request.user)
+        #print(request.user.id)
         p.save()
         return HttpResponseRedirect(reverse("index"))
 
@@ -263,7 +263,6 @@ def following_post(request):
     
 @csrf_exempt
 def edit(request):
-    #print("harshiiiii")
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
     if request.method == "POST":
@@ -365,3 +364,15 @@ def like_unlike(request):
         this_userobj.save()     
     return JsonResponse({"likers": len(this_postobj.likers.all()),"val":val}, status=201)    
 
+@csrf_exempt
+def edit_bio(request):
+    if request.method == "POST":
+        print("edit bio")
+        data = json.loads(request.body.decode("utf-8"))
+        newbio = data.get("newbio")
+        this_userobj = User.objects.get(pk=request.user.id)
+        this_userprofileobj = UserProfile.objects.get(user=this_userobj)
+        this_userprofileobj.bio = newbio
+        this_userprofileobj.save()
+        print(this_userprofileobj.bio)
+        return JsonResponse({"message": "Edit bio request sent successfully."}, status=201)

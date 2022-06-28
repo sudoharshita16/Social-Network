@@ -19,6 +19,7 @@ urlpatterns = [
     path("following_post/lval/<int:pid>",views.lval, name="lval"),
     path("lval/<int:pid>",views.lval,name="lval"),
     path("eval/<int:pid>", views.eval, name="eval"),
-    path("prof",views.profile,name="prof")
+    path("prof",views.profile,name="prof"),
+    path("edit_bio",views.edit_bio,name="edit_bio")
    
 ]

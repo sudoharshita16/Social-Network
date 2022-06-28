@@ -1,5 +1,35 @@
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('follow').onsubmit = function()
+    if (document.querySelector('#bio')!=undefined) {
+        document.querySelector('#bio').onclick = function(){
+            console.log('Clicked on edit bio');
+            document.querySelector('.edit_bio_one').style.display = 'block';
+            document.querySelector('.edit_bio_two').style.display = 'none';
+        }
+    }
+    
+    document.getElementById('edit_bio_form').onsubmit = function(){
+        console.log("Helllo")
+        const bio_data = document.querySelector('#bio_data').value;
+        console.log(bio_data);
+        fetch('/edit_bio',{
+            method:'POST',
+            body: JSON.stringify({
+                newbio:bio_data,
+            })
+        })
+        .then(response => response.json())
+        .then(result=>{
+            console.log(result);
+
+        })
+        document.querySelector('.edit_bio_one').style.display = 'none';
+        document.querySelector('.edit_bio_two').style.display = 'block';
+        document.querySelector('#bio_text').innerHTML = bio_data;
+        
+        return false;
+    }
+    if (document.getElementById('follow')!=undefined){
+        document.getElementById('follow').onsubmit = function()
     {
         const puser_id = document.querySelector('#puser_id').value;
         const followers = document.querySelector('#followers').value;
@@ -70,13 +100,14 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelector('#first').style.display = 'block';
         document.querySelector('#second').style.display = 'none';
     
-        
-
         })
+    
     });//1
 
         return false;
     }
+    }
+    
 
    
     
