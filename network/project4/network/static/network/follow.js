@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log('Clicked on edit bio');
             document.querySelector('.edit_bio_one').style.display = 'block';
             document.querySelector('.edit_bio_two').style.display = 'none';
+            document.querySelector('#bio_text').style.display = 'none';
         }
     }
     
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
         document.querySelector('.edit_bio_one').style.display = 'none';
         document.querySelector('.edit_bio_two').style.display = 'block';
+        document.querySelector('#bio_text').style.display = 'block';
         document.querySelector('#bio_text').innerHTML = bio_data;
         
         return false;

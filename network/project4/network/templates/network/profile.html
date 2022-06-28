@@ -93,12 +93,11 @@
                   <div class="form-group w-25">
                     <label for="posting"></label>
                     <textarea type="text" class="small_textarea" id ="bio_data"  class="form-control" >{{bio}}</textarea>
+                    <input type="submit" value="Edit Bio" id="edit_bio_button" class="btn btn-success editbio-button"></button>
                   </div>
-                  <div class="row">
-                    <div class="col">
-                      <input type="submit" id="edit_bio_button" class="btn btn-success editbio-button"></button>
-                    </div>    
-                  </div>
+                 
+                      
+                 
                 </form>
             </div> 
             <div style="display:block" class = "edit_bio_two">
@@ -106,8 +105,8 @@
               <button type="submit" id="bio"> 
                 <i class="lni lni-pencil"></i>
               </button>
-              <div id="bio_text"style="color:white">{{bio}}</div>
             {% endif %}
+            <div id="bio_text" style="color:white">{{bio}}</div>
             </div>
              
            
